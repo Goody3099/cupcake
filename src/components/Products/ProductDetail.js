@@ -4,7 +4,7 @@ import { ProductContext } from "./ProductProvider"
 import "./Product.css"
 
 export const ProductDetail = () => {
-    const { deleteProduct, getProductById } = useContext(ProductContext)
+    const { deleteProduct, getProductById, editProduct } = useContext(ProductContext)
 
     const [product, setProduct] = useState({})
 
@@ -26,12 +26,18 @@ export const ProductDetail = () => {
         <div className="productPrice">${product.price}</div>
         <button hidden={!localStorage.getItem("CCCL_admin")} onClick={
             () => {
+                    history.push(`/products/edit/${product.id}`)
+            }}>Edit Product
+            </button>
+        <button hidden={!localStorage.getItem("CCCL_admin")} onClick={
+            () => {
                 deleteProduct(product.id)
                 .then(() => {
                     history.push("/products")
                 })
             }}>Delete Product
             </button>
+           
     </section>
     )
 }

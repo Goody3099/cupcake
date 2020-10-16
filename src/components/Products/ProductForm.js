@@ -36,8 +36,8 @@ export const ProductForm = () => {
 
     const constructProductObject = () => {
         if (productId) {
-            editProduct({
-                id: products.id,
+            console.log(productId)
+            editProduct(productId,{
                 name: products.name,
                 description: products.description,
                 price: products.price,
@@ -112,7 +112,14 @@ export const ProductForm = () => {
                 e.preventDefault()
                 constructProductObject()
             }}>
-                {productId ? "Save edited Product" : "Save new Product"}
+                {productId ? "Save" : "Save new Product"}
+            </button>
+            <button className="cancelBtn"
+            disabled={isLoading}
+            onClick={e => {
+                e.preventDefault()
+                history.push("/products")
+            }}>Cancel
             </button>
         </form>
     )
