@@ -9,7 +9,7 @@ export const ProductCard = ({ product }) => (
                 {product.name}
             </Link>
         </h3>
-        <div className="productPicture">{product.picture}</div>
+        <img className="productPicture" src={product.picture} alt={product.name}/>
         <div className="productDescription">Description:{product.description}</div>
         <div className="productPrice">${product.price}</div>
     </section>
