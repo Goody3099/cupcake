@@ -5,14 +5,19 @@ import { ProductList } from "./Products/ProductList"
 import { ProductProvider } from "./Products/ProductProvider"
 import { ProductForm } from "./Products/ProductForm"
 import { ProductDetail } from "./Products/ProductDetail"
+import { MessageProvider } from "./Messages/MessageProvider"
+import { MessageList } from "./Messages/MessageList"
 
 
 export const ApplicationViews = () => {
-    return(
+    return (
         <>
-            <Route exact path="/">
-                <Home />
-            </Route>
+            <MessageProvider>
+                <Route exact path="/">
+                    <Home />
+                    <MessageList />
+                </Route>
+            </MessageProvider>
 
             <ProductProvider>
                 <Route exact path="/products">

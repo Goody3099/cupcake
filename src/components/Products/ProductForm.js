@@ -36,7 +36,6 @@ export const ProductForm = () => {
 
     const constructProductObject = () => {
         if (productId) {
-            console.log(productId)
             editProduct(productId,{
                 name: products.name,
                 description: products.description,
