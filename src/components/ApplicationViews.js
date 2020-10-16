@@ -31,6 +31,12 @@ export const ApplicationViews = () => {
                     <ProductDetail />
                 </Route>
             </ProductProvider>
+
+            <ProductProvider>
+                <Route exact path="/products/edit/:productId(\d+)">
+                    <ProductForm />
+                </Route>
+            </ProductProvider>
         </>
     )
 }

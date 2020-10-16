@@ -33,8 +33,8 @@ export const ProductProvider = (props) => {
         })
     }
 
-    const editProduct = (x) => {
-        return fetch(`http://localhost:8088/products/${x}`, {
+    const editProduct = (id, x) => {
+        return fetch(`http://localhost:8088/products/${id}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"
