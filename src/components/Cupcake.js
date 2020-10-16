@@ -13,7 +13,7 @@ export const Cupcake = () => (
         if (localStorage.getItem("CCCL_customer")) {
           return (
             <>
-              {/* <NavBar /> */}
+              <NavBar />
               <ApplicationViews />
             </>
           );
