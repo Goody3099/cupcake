@@ -7,6 +7,7 @@ import { ProductForm } from "./Products/ProductForm"
 import { ProductDetail } from "./Products/ProductDetail"
 import { MessageProvider } from "./Messages/MessageProvider"
 import { MessageList } from "./Messages/MessageList"
+import { MessageEdit } from "./Messages/MessageEdit"
 
 
 export const ApplicationViews = () => {
@@ -16,6 +17,12 @@ export const ApplicationViews = () => {
                 <Route exact path="/">
                     <Home />
                     <MessageList />
+                </Route>
+            </MessageProvider>
+
+            <MessageProvider>
+                <Route exact path="/edit/:messageId(\d+)">
+                    <MessageEdit />
                 </Route>
             </MessageProvider>
 
