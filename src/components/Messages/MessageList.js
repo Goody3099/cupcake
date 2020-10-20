@@ -13,7 +13,7 @@ export const MessageList = () => {
     useEffect(() => {
         getMessages()
         message.current.value = ""
-    }, [changeMessageList, deleteMessage])
+    }, [changeMessageList])
 
     const constructMessageObject = () => {
         addMessage({
