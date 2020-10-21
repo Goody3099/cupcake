@@ -1,19 +1,32 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import "./NavBar.css"
+import React, { useState } from "react"
+import { NavLink } from "react-router-dom"
+import { Menu } from "semantic-ui-react"
 
 export const NavBar = (props) => {
-    return (
-        <ul className="navbar">
-            <li className="navbarItem active">
-                <Link className="navbarLink" to="/">Home</Link>
-            </li>
-            <li className="navbarItem">
-                <Link className="navbarLink" to="/products">Products</Link>
-            </li>
-            <li className="navbarItem">
-                <Link className="navbarLink" to="/cart">Cart</Link>
-            </li>
-        </ul>
-    )
-}
+
+        return (
+            <Menu>
+                <Menu.Item
+                    as={NavLink} to="/"
+                    exact
+                    name='home'
+                    >
+                    Home 
+                </Menu.Item>
+
+                <Menu.Item
+                    as={NavLink} to="/products"
+                    name='products'
+                    >
+                    Products 
+                </Menu.Item>
+
+                <Menu.Item
+                    as={NavLink} to="/cart"
+                    name='cart'
+                    >
+                    Cart
+                </Menu.Item>
+            </Menu>
+        )
+    }
