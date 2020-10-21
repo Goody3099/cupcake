@@ -1,24 +1,25 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
+import { Button, Form, Input, Header } from "semantic-ui-react"
 import "./Login.css"
 
 export const Register = (props) => {
-    const firstName = useRef()
-    const lastName = useRef()
-    const email = useRef()
-    const username = useRef()
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
     const conflictDialog = useRef()
     const conflictDialog1 = useRef()
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?email=${email}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
 
     const usernameCheck = () => {
-        return fetch(`http://localhost:8088/users?username=${username.current.value}`)
+        return fetch(`http://localhost:8088/users?username=${username}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -28,7 +29,8 @@ export const Register = (props) => {
 
         usernameCheck()
             .then((userExists) => {
-                if (userExists) { conflictDialog1.current.showModal() 
+                if (userExists) {
+                    conflictDialog1.current.showModal()
                 }
                 else {
                     existingUserCheck()
@@ -40,10 +42,10 @@ export const Register = (props) => {
                                         "Content-Type": "application/json"
                                     },
                                     body: JSON.stringify({
-                                        email: email.current.value,
-                                        firstName: `${firstName.current.value}`,
-                                        lastName: `${lastName.current.value}`,
-                                        username: `${username.current.value}`
+                                        email: email,
+                                        firstName: `${firstName}`,
+                                        lastName: `${lastName}`,
+                                        username: `${username}`
 
                                     })
                                 })
@@ -64,8 +66,7 @@ export const Register = (props) => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-
+        <main>
             <dialog className="dialog dialog--password" ref={conflictDialog}>
                 <div>Account with that email address already exists</div>
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
@@ -74,29 +75,45 @@ export const Register = (props) => {
                 <div>Account with that Username already exists</div>
                 <button className="button--close" onClick={e => conflictDialog1.current.close()}>Close</button>
             </dialog>
-
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for NSS Kennels</h1>
-                <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="username"> Username </label>
-                    <input ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
-                </fieldset>
-                <fieldset>
-                    <button type="submit"> Sign in </button>
-                </fieldset>
-            </form>
+            <Header size="huge">The Crazy Cupcake Lady's Cakes, Cupcakes and Cookies</Header>
+            <h3>Registration</h3>
+            <Form onSubmit={handleRegister}>
+                <Form.Input
+                    onChange={(event) => setFirstName(event.target.value)}
+                    id="form-input-firstName"
+                    control={Input}
+                    label="First Name"
+                    placeholder="First Name"
+                    width={6}
+                    required />
+                <Form.Input
+                    onChange={(event) => setLastName(event.target.value)}
+                    id="form-input-lastName"
+                    control={Input}
+                    label="Last Name"
+                    placeholder="Last Name"
+                    width={6}
+                    required />
+                <Form.Input
+                    onChange={(event) => setUsername(event.target.value)}
+                    id="form-input-username"
+                    control={Input}
+                    label="Username"
+                    placeholder="Username"
+                    width={6}
+                    required />
+                <Form.Input
+                    onChange={(event) => setEmail(event.target.value)}
+                    id="form-input-email"
+                    control={Input}
+                    label="Email"
+                    placeholder="Email"
+                    width={6}
+                    required />
+                <Button color="purple" type="submit">
+                    Register and Login
+                </Button>
+            </Form>
         </main>
     )
 }

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react"
 import { MessageContext } from "./MessageProvider"
 import { MessageCard } from "./MessageCard"
 import "./Message.css"
+import { Card, Button, Input, Container } from "semantic-ui-react"
 
 export const MessageList = () => {
     const { messages, getMessages, addMessage, deleteMessage } = useContext(MessageContext)
@@ -33,17 +34,19 @@ export const MessageList = () => {
                     })
                 }
             </div>
-                <div className="formGroup">
-                    <input type="text" ref={message} id="message" name="name" className="formControl" 
-                    placeholder="..."/>
-                </div>
-            <button className="messageBtn"
+                <Card className="formGroup">
+                    <Input type="text" ref={message} id="message" name="name" className="formControl" 
+                    placeholder="Tell us about your experience."/>
+                </Card>
+            <Button 
+            size="mini"
+            className="messageBtn"
                 onClick={event => {
                     event.preventDefault() // Prevent browser from submitting the form
                     constructMessageObject()
                 }}>
             Submit 
-            </button>
+            </Button>
         </>
     )
 }

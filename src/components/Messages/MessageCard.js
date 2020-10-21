@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import { useHistory } from "react-router-dom"
+import { Button, Card, Icon } from "semantic-ui-react"
 import "./Message.css"
 import { MessageContext } from "./MessageProvider"
 
@@ -27,23 +28,37 @@ export const MessageCard = ({ message }) => {
             return true
         }
     }
-    
+
     return (
-        <section className="message">
-            <h3 className="messageText">{message.message}</h3>
-            <div className="messageUser">{message.user.username}</div>
-            <button hidden={hideDelete()}
+
+        <Card>
+            <Card.Content>
+                <Card.Header>{message.user.username}</Card.Header>
+                {/* <Card.Meta>{message.date}</Card.Meta> */}
+                <Card.Description>{message.message}</Card.Description>
+            </Card.Content>
+
+            <Button.Group>
+            {hideDelete() ? "" : <Button
+                
+                icon
                 className="messageDeleteBtn"
                 onClick={event => {
                     event.preventDefault()
                     deleteMessage(message.id)
                 }}>
-                Delete
-            </button>
-            <button hidden={hideEdit()} className="messageEditBtn"
-                onClick={event => {
+                    <Icon name="trash" />
+            </Button>}
+
+            {hideEdit() ? "" : <Button
+                icon
+                className="messageEditBtn"
+                onClick={() => {
                     history.push(`/edit/${message.id}`)
-                }}>Edit</button>
-        </section>
+                }}>
+                    <Icon name="edit" />
+            </Button>}
+            </Button.Group>
+        </Card>
     )
 }
