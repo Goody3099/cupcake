@@ -1,24 +1,25 @@
-import React, { useRef } from "react"
+import React, { useState, useRef } from "react"
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom"
+import { Button, Form, Input } from "semantic-ui-react";
 import "./Login.css"
 
-
 export const Login = props => {
-    const username = useRef()
-    const email = useRef()
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
     const existDialog = useRef()
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        console.log(email)
+        return fetch(`http://localhost:8088/users?email=${email}`)
             .then(res => res.json())
             .then(user => {
-                if(user[0].username === username.current.value){
-                return user[0]
-            }
-            else{return false}
-        })
+                if (user[0].username === username) {
+                    return user[0]
+                }
+                else { return false }
+            })
     }
 
     const handleLogin = (e) => {
@@ -28,7 +29,7 @@ export const Login = props => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("CCCL_customer", exists.id)
-                    if(!!exists.admin){
+                    if (!!exists.admin) {
                         localStorage.setItem("CCCL_admin", exists.admin)
                     }
                     history.push("/")
@@ -44,34 +45,25 @@ export const Login = props => {
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
             </dialog>
-
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>CrazyCupCakeLady</h1>
-                    <h2>Please sign in</h2>
-                    <fieldset>
-                        <label htmlFor="inputUsername"> Username </label>
-                        <input ref={username} type="username"
-                            id="username"
-                            className="form-control"
-                            placeholder="Username"
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email"
-                            id="email"
-                            className="form-control"
-                            placeholder="Email address"
-                            required />
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit">
-                            Sign in
-                        </button>
-                    </fieldset>
-                </form>
-            </section>
+            <Form onSubmit={handleLogin}>
+                <Form.Input
+                    onChange={(event) => setUsername(event.target.value)}
+                    id="form-input-username"
+                    control={Input}
+                    label="username"
+                    placeholder="username"
+                    width={6} />
+                <Form.Input
+                    onChange={(event) => setEmail(event.target.value)}
+                    id="form-input-email"
+                    control={Input}
+                    label="email"
+                    placeholder="email"
+                    width={6} />
+                <Button type="submit">
+                    Login
+                </Button>
+            </Form>
             <section className="link--register">
                 <Link to="/register">Not a member yet?</Link>
             </section>
