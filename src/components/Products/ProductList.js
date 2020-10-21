@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom"
 import { ProductCard } from "./ProductCard"
 import { ProductContext } from "./ProductProvider"
 import "./Product.css"
+import { Card } from "semantic-ui-react"
 
 export const ProductList = () => {
     const {products, getProducts, searchTerms} = useContext(ProductContext)
@@ -23,11 +24,11 @@ export const ProductList = () => {
             Add New Product
         </button>
 
-        <div className="products">
+        <Card.Group className="products">
             {products.map(product => {
                 return <ProductCard key={product.id} product={product} />
             })}
-        </div>
+        </Card.Group>
         </>
     )
 }
