@@ -37,6 +37,7 @@ export const MessageProvider = (props) => {
             },
             body: JSON.stringify(x)
         })
+        .then(getMessages)
     }
 
     const getMessageById = (id) => {

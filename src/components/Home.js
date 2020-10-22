@@ -2,6 +2,6 @@ import React from "react"
 
 export const Home = () => (
     <>
-    <h2>CrazyCupCakeLady</h2>
+    <h2>The Crazy Cupcake Lady's Cakes, Cupcakes and Cookies</h2>
     </>
 )

@@ -1,0 +1,16 @@
+.messages {
+    max-height: 30em;
+    overflow: auto;
+    
+}
+
+.card{
+    width: auto !important;
+}
+textarea {
+    resize: none;
+    width: 100%;
+}
+.messageBtn {
+    width: 10% !important;
+}
