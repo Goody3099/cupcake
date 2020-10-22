@@ -90,6 +90,7 @@ export const MessageCard = ({ message }) => {
                         className="messageBtn"
                         onClick={event => {
                             event.preventDefault()
+                            setEditMessageInfo(message.message)
                             setOpen(true)
                         }}>
                         <Icon name="edit" />
