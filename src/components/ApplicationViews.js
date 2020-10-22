@@ -1,13 +1,17 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { Home } from "./Home"
-import { ProductList } from "./Products/ProductList"
-import { ProductProvider } from "./Products/ProductProvider"
-import { ProductForm } from "./Products/ProductForm"
-import { ProductDetail } from "./Products/ProductDetail"
 import { MessageProvider } from "./Messages/MessageProvider"
 import { MessageList } from "./Messages/MessageList"
-
+import { CakeList } from "./Products/Cakes/CakeList"
+import { CakeForm } from "./Products/Cakes/CakeForm"
+import { CakeProvider } from "./Products/Cakes/CakeProvider"
+import { CookieList } from "./Products/Cookies/CookieList"
+import { CookieForm } from "./Products/Cookies/CookieForm"
+import { CookieProvider } from "./Products/Cookies/CookieProvider"
+import { CupcakeList } from "./Products/Cupcakes/CupcakeList"
+import { CupcakeForm } from "./Products/Cupcakes/CupcakeForm"
+import { CupcakeProvider } from "./Products/Cupcakes/CupcakeProvider"
 
 export const ApplicationViews = () => {
     return (
@@ -19,29 +23,59 @@ export const ApplicationViews = () => {
                 </Route>
             </MessageProvider>
 
-            <ProductProvider>
-                <Route exact path="/products">
-                    <ProductList />
+            <CakeProvider>
+                <Route exact path="/cakes">
+                    <CakeList />
                 </Route>
-            </ProductProvider>
+            </CakeProvider>
 
-            <ProductProvider>
-                <Route exact path="/products/create">
-                    <ProductForm />
+            <CakeProvider>
+                <Route exact path="/cakes/create">
+                    <CakeForm />
                 </Route>
-            </ProductProvider>
+            </CakeProvider>
 
-            <ProductProvider>
-                <Route exact path="/products/detail/:productId(\d+)">
-                    <ProductDetail />
+            <CakeProvider>
+                <Route exact path="/cakes/edit/:productId(\d+)">
+                    <CakeForm />
                 </Route>
-            </ProductProvider>
+            </CakeProvider>
 
-            <ProductProvider>
-                <Route exact path="/products/edit/:productId(\d+)">
-                    <ProductForm />
+            <CookieProvider>
+                <Route exact path="/cookies">
+                    <CookieList />
                 </Route>
-            </ProductProvider>
+            </CookieProvider>
+
+            <CookieProvider>
+                <Route exact path="/cookies/create">
+                    <CookieForm />
+                </Route>
+            </CookieProvider>
+
+            <CookieProvider>
+                <Route exact path="/cookies/edit/:productId(\d+)">
+                    <CookieForm />
+                </Route>
+            </CookieProvider>
+
+            <CupcakeProvider>
+                <Route exact path="/cupcakes">
+                    <CupcakeList />
+                </Route>
+            </CupcakeProvider>
+
+            <CupcakeProvider>
+                <Route exact path="/cupcakes/create">
+                    <CupcakeForm />
+                </Route>
+            </CupcakeProvider>
+
+            <CupcakeProvider>
+                <Route exact path="/cupcakes/edit/:productId(\d+)">
+                    <CupcakeForm />
+                </Route>
+            </CupcakeProvider>
         </>
     )
 }

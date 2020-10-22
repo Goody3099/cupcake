@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { Button, Card, Icon, Modal, Header, Input, TextArea } from "semantic-ui-react"
+import { Button, Card, Icon, Modal } from "semantic-ui-react"
 import "./Message.css"
 import { MessageContext } from "./MessageProvider"
 
@@ -65,7 +65,7 @@ export const MessageCard = ({ message }) => {
                 </Modal.Actions>
             </Modal>
 
-            <Card>
+            <Card className="messageCard">
                 <Card.Content>
                     <Card.Header>{message.user.username}</Card.Header>
                     <Card.Description
@@ -74,7 +74,8 @@ export const MessageCard = ({ message }) => {
                     </Card.Description>
                 </Card.Content>
 
-                <Button.Group vertical>
+                <div>
+                    <span>
                     {hideDelete() ? "" : <Button
                         icon
                         className="messageBtn"
@@ -93,7 +94,8 @@ export const MessageCard = ({ message }) => {
                         }}>
                         <Icon name="edit" />
                     </Button>}
-                </Button.Group>
+                    </span>
+                </div>
             </Card>
         </>
     )
