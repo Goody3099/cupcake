@@ -1,64 +1,81 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
-import { Menu } from "semantic-ui-react"
+import { Menu, Sticky } from "semantic-ui-react"
 import "./NavBar.css"
 
 export const NavBar = (props) => {
 
-        return (
-            <Menu inverted>
+    const checkAdmin = () => {
+        if(!!localStorage.getItem("CCCL_admin")) {
+            return (
+                <Menu.Item
+                color="purple"
+                as={NavLink} to="/products/create"
+                name='Add Product'
+                />
+            )
+        }
+        else {
+            return (
+                <Menu.Item
+            color="purple"
+            as={NavLink} to="/cart"
+            name='Cart'
+            />)
+        }
+
+    }
+
+    return (
+        <Sticky>
+            <Menu className="navBar" inverted>
                 <Menu.Item
                     color="purple"
                     as={NavLink} to="/"
                     exact
                     name='home'
-                    >
-                    Home 
+                >
+                    Home
                 </Menu.Item>
 
                 <Menu.Item
                     color="purple"
-                    as={NavLink} to="/cupcakes"
+                    as={NavLink} to="/products/cupcakes"
                     name='cupcakes'
-                    >
-                    Cupcakes 
+                >
+                    Cupcakes
                 </Menu.Item>
 
                 <Menu.Item
                     color="purple"
-                    as={NavLink} to="/cakes"
+                    as={NavLink} to="/products/cakes"
                     name='cakes'
-                    >
-                    Cakes 
+                >
+                    Cakes
                 </Menu.Item>
 
                 <Menu.Item
                     color="purple"
-                    as={NavLink} to="/cookies"
+                    as={NavLink} to="/products/cookies"
                     name='cookies'
-                    >
-                    Cookies 
+                >
+                    Cookies
                 </Menu.Item>
 
-                <Menu.Item
-                    color="purple"
-                    as={NavLink} to="/cart"
-                    name='cart'
-                    >
-                    Cart
-                </Menu.Item>
+                {checkAdmin()}
                 
                 <Menu.Menu position="right">
                     <Menu.Item
-                    color="purple"
-                    name='logout'
-                    as={NavLink} to="/login"
-                    onClick={() => {
-                        localStorage.clear()
-                    }}>
+                        color="purple"
+                        name='logout'
+                        as={NavLink} to="/login"
+                        onClick={() => {
+                            localStorage.clear()
+                        }}>
                         Logout
                     </Menu.Item>
                 </Menu.Menu>
             </Menu>
-        )
-    }
+        </Sticky>
+    )
+}
