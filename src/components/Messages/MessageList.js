@@ -7,18 +7,19 @@ import { Card, Button, Input, Container } from "semantic-ui-react"
 export const MessageList = () => {
     const { messages, getMessages, addMessage, deleteMessage } = useContext(MessageContext)
 
-    const message = useRef()
+    const [message, setMessage] = useState("") 
 
     const [changeMessageList, setChangeMessageList] = useState({})
 
     useEffect(() => {
         getMessages()
-        message.current.value = ""
+        setMessage("")
+        document.getElementById("message").value = ""
     }, [changeMessageList])
 
     const constructMessageObject = () => {
         addMessage({
-            message: message.current.value,
+            message: message,
             userId: parseInt(localStorage.getItem("CCCL_customer"))
         })
         .then(setChangeMessageList)
@@ -26,7 +27,8 @@ export const MessageList = () => {
 
     return (
         <>
-            <h2>Messages</h2>
+            <Container>
+            <h2>User Experiences</h2>
             <div className="messages">
                 {
                     messages.map(message => {
@@ -35,9 +37,14 @@ export const MessageList = () => {
                 }
             </div>
                 <Card className="formGroup">
-                    <Input type="text" ref={message} id="message" name="name" className="formControl" 
+                    <Input type="text" 
+                    onChange={e => setMessage(e.target.value)} 
+                    id="message" 
+                    name="name" 
+                    className="formControl" 
                     placeholder="Tell us about your experience."/>
                 </Card>
+                
             <Button 
             size="mini"
             className="messageBtn"
@@ -47,6 +54,8 @@ export const MessageList = () => {
                 }}>
             Submit 
             </Button>
+            </Container>
+            
         </>
     )
 }

@@ -1,12 +1,14 @@
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { Button, Card, Icon } from "semantic-ui-react"
+import { Button, Card, Icon, Modal, Header, Input, TextArea } from "semantic-ui-react"
 import "./Message.css"
 import { MessageContext } from "./MessageProvider"
 
 export const MessageCard = ({ message }) => {
 
-    const { deleteMessage } = useContext(MessageContext)
+    const { deleteMessage, editMessage } = useContext(MessageContext)
+    const [editMessageInfo, setEditMessageInfo] = useState("")
+    const [open, setOpen] = useState(false)
 
     const history = useHistory()
 
@@ -30,35 +32,69 @@ export const MessageCard = ({ message }) => {
     }
 
     return (
+        <>
+            <Modal
+                onClose={() => setOpen(false)}
+                onOpen={() => setOpen(true)}
+                open={open}
+            >
 
-        <Card>
-            <Card.Content>
-                <Card.Header>{message.user.username}</Card.Header>
-                {/* <Card.Meta>{message.date}</Card.Meta> */}
-                <Card.Description>{message.message}</Card.Description>
-            </Card.Content>
+                <Modal.Content>
+                    <textarea
+                        onChange={e => setEditMessageInfo(e.target.value)}
+                        rows="5"
+                        defaultValue={message.message}>
 
-            <Button.Group>
-            {hideDelete() ? "" : <Button
-                
-                icon
-                className="messageDeleteBtn"
-                onClick={event => {
-                    event.preventDefault()
-                    deleteMessage(message.id)
-                }}>
-                    <Icon name="trash" />
-            </Button>}
+                    </textarea>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button color='black' onClick={() => setOpen(false)}>
+                        Cancel
+          </Button>
+                    <Button
+                        content="Save"
+                        labelPosition='right'
+                        icon='checkmark'
+                        onClick={() => {
+                            editMessage(message.id, { message: editMessageInfo })
+                            setOpen(false)
 
-            {hideEdit() ? "" : <Button
-                icon
-                className="messageEditBtn"
-                onClick={() => {
-                    history.push(`/edit/${message.id}`)
-                }}>
-                    <Icon name="edit" />
-            </Button>}
-            </Button.Group>
-        </Card>
+                        }}
+                        positive
+                    />
+                </Modal.Actions>
+            </Modal>
+
+            <Card>
+                <Card.Content>
+                    <Card.Header>{message.user.username}</Card.Header>
+                    <Card.Description
+                        content={message.message}
+                    >
+                    </Card.Description>
+                </Card.Content>
+
+                <Button.Group vertical>
+                    {hideDelete() ? "" : <Button
+                        icon
+                        className="messageBtn"
+                        onClick={event => {
+                            event.preventDefault()
+                            deleteMessage(message.id)
+                        }}>
+                        <Icon name="trash" />
+                    </Button>}
+                    {hideEdit() ? "" : <Button
+                        icon
+                        className="messageBtn"
+                        onClick={event => {
+                            event.preventDefault()
+                            setOpen(true)
+                        }}>
+                        <Icon name="edit" />
+                    </Button>}
+                </Button.Group>
+            </Card>
+        </>
     )
 }
