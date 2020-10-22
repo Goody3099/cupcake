@@ -1,18 +1,17 @@
 import React from "react"
-import "./Product.css"
 import { Card, Image, Icon } from "semantic-ui-react"
 
-export const ProductCard = ({ product }) => (
+export const CakeCard = ({ cake }) => (
     <Card color="purple" >
-        <Image src={product.picture} wrapped ui={false} />
+        <Image src={cake.picture} wrapped ui={false} />
         <Card.Content>
-            <Card.Header>{product.name}</Card.Header>
-            <Card.Description>{product.description}</Card.Description>
+            <Card.Header>{cake.name}</Card.Header>
+            <Card.Description>{cake.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
             <a>
                 <Icon name="dollar sign" />
-                {product.price}
+                {cake.price}
             </a>
         </Card.Content>
     </Card>

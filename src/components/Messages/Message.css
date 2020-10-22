@@ -1,16 +1,28 @@
 .messages {
     max-height: 30em;
     overflow: auto;
-    
 }
 
-.card{
+.messageCard{
     width: auto !important;
 }
+
 textarea {
     resize: none;
     width: 100%;
 }
+
 .messageBtn {
-    width: 10% !important;
+    width: 5% !important;
+    float: right;
+}
+
+.messageSubmitBtn {
+    float: right;
+    width: 10%;
+    height: 3.5em;
+}
+
+.messageInput {
+    width: 89%;
 }

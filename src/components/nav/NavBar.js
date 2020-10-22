@@ -18,10 +18,26 @@ export const NavBar = (props) => {
 
                 <Menu.Item
                     color="purple"
-                    as={NavLink} to="/products"
-                    name='products'
+                    as={NavLink} to="/cupcakes"
+                    name='cupcakes'
                     >
-                    Products 
+                    Cupcakes 
+                </Menu.Item>
+
+                <Menu.Item
+                    color="purple"
+                    as={NavLink} to="/cakes"
+                    name='cakes'
+                    >
+                    Cakes 
+                </Menu.Item>
+
+                <Menu.Item
+                    color="purple"
+                    as={NavLink} to="/cookies"
+                    name='cookies'
+                    >
+                    Cookies 
                 </Menu.Item>
 
                 <Menu.Item
