@@ -1,49 +1,40 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Button, Card, Container, Grid, Sticky } from "semantic-ui-react"
+import { Button, Card, Form, Grid, Input, MessageList, Modal } from "semantic-ui-react"
 import { CartCard } from "./CartCard"
+import { CartChat } from "./CartChat"
 import { CartContext } from "./CartProvider"
 
 export const CartList = () => {
 
-    const { items, getCart } = useContext(CartContext)
-
-    const [item, setItem] = useState({})
+    const { items, getCart, messages, getMessages  } = useContext(CartContext)
 
     useEffect(() => {
         getCart()
     }, [])
 
-    const buyItem = () => {
-
-    }
+    useEffect(() => {
+        getMessages()
+    }, [])
 
     return (
         <>
             <h2>Cart</h2>
-            <Grid>
-                <Grid.Row>
-                    <Grid.Column width={12}>
-                        <div>
-                            <Card.Group>
-                            {
-                                items.map(item => {
-                                    return <CartCard key={item.id} items={item} />
-                                })
-                            }
-                            </Card.Group>
-                        </div>
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                        <Button
-                            onClick={e => {
-                                e.preventDefault()
-                                buyItem()
-                            }}>
-                            Buy
-                    </Button>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <div>
+                {
+                    items.map(item => {
+                        return <CartCard key={item.id} items={item} />
+                    })
+                }
+
+            </div>
+            <h2>Placed Order</h2>
+            <div>
+                {
+                    messages.map(message => {
+                        return <CartChat key={message.id} messages={message} />
+                    })
+                }
+            </div>
         </>
     )
 }

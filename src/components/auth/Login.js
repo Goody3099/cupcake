@@ -28,6 +28,7 @@ export const Login = props => {
         existingUserCheck()
             .then(exists => {
                 if (exists) {
+                    localStorage.setItem("CCCL_username", exists.username)
                     localStorage.setItem("CCCL_customer", exists.id)
                     if (!!exists.admin) {
                         localStorage.setItem("CCCL_admin", exists.admin)

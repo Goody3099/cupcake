@@ -1,3 +1,7 @@
 .cartCard {
     width: 15em !important;
 }
+
+.placeOrderTextArea {
+    resize: none !important;
+}

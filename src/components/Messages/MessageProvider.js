@@ -7,13 +7,13 @@ export const MessageProvider = (props) => {
     const [messages, setMessages] = useState([])
     
     const getMessages = () => {
-        return fetch(`http://localhost:8088/messages?_expand=user`)
+        return fetch(`http://localhost:8088/reviews?_expand=user`)
         .then(res => res.json())
         .then(setMessages)
     }
 
     const addMessage = (x) => {
-        return fetch(`http://localhost:8088/messages`, {
+        return fetch(`http://localhost:8088/reviews`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -23,14 +23,14 @@ export const MessageProvider = (props) => {
     }
 
     const deleteMessage = (x) => {
-        return fetch(`http://localhost:8088/messages/${x}`, {
+        return fetch(`http://localhost:8088/reviews/${x}`, {
             method: "DELETE"
         })
         .then(getMessages)
     }
 
     const editMessage = (id, x) => {
-        return fetch(`http://localhost:8088/messages/${id}`, {
+        return fetch(`http://localhost:8088/reviews/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -41,7 +41,7 @@ export const MessageProvider = (props) => {
     }
 
     const getMessageById = (id) => {
-        return fetch(`http://localhost:8088/messages/${id}`)
+        return fetch(`http://localhost:8088/reviews/${id}`)
         .then(res => res.json())
         .then(res => {
             setMessages(res)
