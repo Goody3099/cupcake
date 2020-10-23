@@ -6,6 +6,8 @@ import { MessageList } from "./Messages/MessageList"
 import { ProductListCake, ProductListCookie, ProductListCupcake } from "./Products/ProductList"
 import { ProductForm } from "./Products/ProductForm"
 import { ProductProvider } from "./Products/ProductProvider"
+import { CartProvider } from "./Cart/CartProvider"
+import { CartList } from "./Cart/CartList"
 
 export const ApplicationViews = () => {
     return (
@@ -46,6 +48,12 @@ export const ApplicationViews = () => {
                     <ProductForm />
                 </Route>
             </ProductProvider>
+
+            <CartProvider>
+                <Route exact path="/cart">
+                    <CartList />
+                </Route>
+            </CartProvider>
 
         </>
     )
