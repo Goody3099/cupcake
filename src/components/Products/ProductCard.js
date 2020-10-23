@@ -29,6 +29,7 @@ export const ProductCard = ({ product }) => {
                     price: product.price,
                     picture: product.picture,
                     name: product.name,
+                    description: product.description,
                     userId: parseInt(localStorage.getItem("CCCL_customer"))
                     })}>
                     Add to Cart

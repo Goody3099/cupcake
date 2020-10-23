@@ -58,7 +58,6 @@ export const MessageCard = ({ message }) => {
                         onClick={() => {
                             editMessage(message.id, { message: editMessageInfo })
                             setOpen(false)
-
                         }}
                         positive
                     />
@@ -76,25 +75,25 @@ export const MessageCard = ({ message }) => {
 
                 <div>
                     <span>
-                    {hideDelete() ? "" : <Button
-                        icon
-                        className="messageBtn"
-                        onClick={event => {
-                            event.preventDefault()
-                            deleteMessage(message.id)
-                        }}>
-                        <Icon name="trash" />
-                    </Button>}
-                    {hideEdit() ? "" : <Button
-                        icon
-                        className="messageBtn"
-                        onClick={event => {
-                            event.preventDefault()
-                            setEditMessageInfo(message.message)
-                            setOpen(true)
-                        }}>
-                        <Icon name="edit" />
-                    </Button>}
+                        {hideDelete() ? "" : <Button
+                            icon
+                            className="messageBtn"
+                            onClick={event => {
+                                event.preventDefault()
+                                deleteMessage(message.id)
+                            }}>
+                            <Icon name="trash" />
+                        </Button>}
+                        {hideEdit() ? "" : <Button
+                            icon
+                            className="messageBtn"
+                            onClick={event => {
+                                event.preventDefault()
+                                setEditMessageInfo(message.message)
+                                setOpen(true)
+                            }}>
+                            <Icon name="edit" />
+                        </Button>}
                     </span>
                 </div>
             </Card>
