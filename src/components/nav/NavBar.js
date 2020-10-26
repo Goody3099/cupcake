@@ -8,11 +8,19 @@ export const NavBar = (props) => {
     const checkAdmin = () => {
         if(!!localStorage.getItem("CCCL_admin")) {
             return (
+                <>
                 <Menu.Item
                 color="purple"
                 as={NavLink} to="/products/create"
                 name='Add Product'
                 />
+
+<Menu.Item
+                color="purple"
+                as={NavLink} to="/products/requests"
+                name='Requests'
+                />
+                </>
             )
         }
         else {
