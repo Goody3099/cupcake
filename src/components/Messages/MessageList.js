@@ -11,19 +11,33 @@ export const MessageList = () => {
 
     const [changeMessageList, setChangeMessageList] = useState({})
 
+    const constructMessageObject = () => {
+        addMessage({
+            message: message,
+            userId: parseInt(localStorage.getItem("CCCL_customer")),
+            date: Date.now()
+        })
+        .then(setChangeMessageList)
+    }
+
+    function compare(a, b) {
+        const bandA = a.date;
+        const bandB = b.date;
+    
+        let comparison = 0;
+        if (bandA > bandB) {
+          comparison = 1;
+        } else if (bandA < bandB) {
+          comparison = -1;
+        }
+        return comparison;
+      }
+
     useEffect(() => {
         getMessages()
         setMessage("")
         document.getElementById("message").value = ""
     }, [changeMessageList])
-
-    const constructMessageObject = () => {
-        addMessage({
-            message: message,
-            userId: parseInt(localStorage.getItem("CCCL_customer"))
-        })
-        .then(setChangeMessageList)
-    }
 
     return (
         <>
@@ -31,7 +45,7 @@ export const MessageList = () => {
             <h2>User Experiences</h2>
             <div className="messages">
                 {
-                    messages.map(message => {
+                    messages.sort(compare).map(message => {
                         return <MessageCard key={message.id} message={message} />
                     })
                 }
@@ -49,7 +63,7 @@ export const MessageList = () => {
             size="mini"
             className="messageSubmitBtn"
                 onClick={event => {
-                    event.preventDefault() // Prevent browser from submitting the form
+                    event.preventDefault()
                     constructMessageObject()
                 }}>
             Submit 

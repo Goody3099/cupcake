@@ -1,27 +1,24 @@
 import React, { useContext, useEffect, useState } from "react"
-import { isElement } from "react-dom/test-utils"
-import { Button, Container, Divider, Input } from "semantic-ui-react"
-import { CartCard } from "./CartCard"
-import { CartChat } from "./CartChat"
+import { useParams } from "react-router-dom"
+import { Button, Card, Container, Divider, Input } from "semantic-ui-react"
 import { CartContext } from "./CartProvider"
 
-export const CartList = () => {
+export const CartRequestDetail = () => {
 
-    const { items, getCart, requests, getRequestedOrders, responses, getRequestedResponses, addMessage  } = useContext(CartContext)
+    const {userId} = useParams()
 
-    const [message, setMessage] = useState([])
-    const [messages, setMessages] = useState([])
+    const [user, setUser] = useState({})
+    const [message, setMessage] = useState("")
+    const [x, setX] = useState([])
+
+    const {messages, getMessages, getUserById, addMessage} = useContext(CartContext)
 
     useEffect(() => {
-        getCart()
-    }, [])
-
-    useEffect(() => {
-        getRequestedOrders()
-        getRequestedResponses()
+        getMessages()
+        getUserById(userId).then(setUser)
         document.getElementById("message").value = ""
-    }, [messages])
-
+    },[x])
+    
     function compare(a, b) {
         // Use toUpperCase() to ignore character casing
         const bandA = a.date;
@@ -35,27 +32,16 @@ export const CartList = () => {
         }
         return comparison;
       }
-
+      
     return (
         <>
-            <h2>Cart</h2>
-            <div>
-                {
-                    items.map(item => {
-                        return <CartCard key={item.id} items={item} />
-                    })
-                }
-
-            </div>
-            <h2>Requested Orders</h2>
-            <Container>
-                {
-                    requests.concat(responses).sort(compare).map(request => {
-                        return <CartChat key={request.id} messages={request} />
-                    })
-                }
-                <Divider hidden/>
-                <Input  type="text" 
+        <Container>
+            <h2>{user[0]?.username}</h2>
+            {messages.filter(e => e.sentId === parseInt(userId)).concat(messages.filter(e => e.recId === parseInt(userId))).sort(compare).map(message => {
+                return <Card className="messageCard">{message.sentUsername}: {message.message}</Card>
+            })}
+            <Divider hidden/>
+            <Input  type="text" 
                     onChange={e => setMessage(e.target.value)} 
                     id="message" 
                     name="name" 
@@ -71,13 +57,13 @@ export const CartList = () => {
                     addMessage(
                         {
                             sentId: parseInt(localStorage.getItem("CCCL_customer")),
-                            recId: 1,
+                            recId: parseInt(userId),
                             sentUsername: localStorage.getItem("CCCL_username"),
                             message: message,
                             date: Date.now()
                         }
                     )
-                    .then(setMessages())
+                    .then(setX)
                 }}>
             Submit 
             </Button>
