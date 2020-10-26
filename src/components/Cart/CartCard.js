@@ -7,7 +7,7 @@ import "./Cart.css"
 
 export const CartCard = ({ items }) => {
 
-    const { removeFromCart, getMessages, addMessage } = useContext(CartContext)
+    const { removeFromCart, getRequestedOrders, addMessage } = useContext(CartContext)
     const [open, setOpen] = useState(false)
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
@@ -26,13 +26,13 @@ export const CartCard = ({ items }) => {
     }
 
     const chatAdmin = (d, t, c, i) => {
-        console.log(i)
         addMessage({
             sentId: parseInt(localStorage.getItem("CCCL_customer")),
             sentUsername: localStorage.getItem("CCCL_username"),
             recId: 1,
             message: ` Hi, I would like the ${i.description} on ${d} at ${t}. Comments/Questions: ${c}`
         })
+        .then(getRequestedOrders)
     }
 
     const history = useHistory()
@@ -48,16 +48,16 @@ export const CartCard = ({ items }) => {
                 <Icon name="dollar sign" />
                 {items.price}
             </Card.Content>
-            <Button
-                onClick={e => removeFromCart(items.id)}>
-                Remove from Cart
+                <Button
+                    onClick={e => removeFromCart(items.id)}>
+                    Remove from Cart
                 </Button>
-            <Button
-                onClick={e => {
-                    e.preventDefault()
-                    setOpen(true)
-                }}>
-                Place Order
+                <Button
+                    onClick={e => {
+                        e.preventDefault()
+                        setOpen(true)
+                    }}>
+                    Request Order
             </Button>
 
             <Modal
@@ -93,7 +93,7 @@ export const CartCard = ({ items }) => {
                         Cancel
                     </Button>
                     <Button
-                        content="Place Order"
+                        content="Submit Request"
                         labelPosition='right'
                         icon='checkmark'
                         type="submit"

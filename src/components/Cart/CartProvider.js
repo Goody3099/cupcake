@@ -5,6 +5,8 @@ export const CartContext = createContext()
 export const CartProvider = (props) => {
     const [items, setItems] = useState([])
     const [messages, setMessages] = useState([])
+    const [requests, setRequests] = useState([])
+    const [responses, setResponses] = useState([])
 
     const getCart = () => {
         return fetch(`http://localhost:8088/cart?userId=${parseInt(localStorage.getItem("CCCL_customer"))}`)
@@ -12,8 +14,35 @@ export const CartProvider = (props) => {
         .then(setItems)
     }
 
+    const getUserById = (x) => {
+        return fetch(`http://localhost:8088/users?id=${x}`)
+        .then(res => res.json())
+    }
+
+    const getUsers = () => {
+        return fetch(`http://localhost:8088/users`)
+        .then(res => res.json())
+    }
+
+    const getRequestedOrders = () => {
+        console.log("called?")
+        return fetch(`http://localhost:8088/messages?sentId=${parseInt(localStorage.getItem("CCCL_customer"))}`)
+        .then(res => res.json())
+        .then(res => {
+            setRequests(res)
+            return res})
+    }
+
+    const getRequestedResponses = () => {
+        console.log("called?")
+        return fetch(`http://localhost:8088/messages?recId=${parseInt(localStorage.getItem("CCCL_customer"))}`)
+        .then(res => res.json())
+        .then(res => {
+            setResponses(res)
+            return res})
+    }
+
     const removeFromCart = (x) => {
-        console.log(x)
         return fetch(`http://localhost:8088/cart/${x}`, {
             method: "DELETE"
         })
@@ -23,7 +52,9 @@ export const CartProvider = (props) => {
     const getMessages = () => {
         return fetch(`http://localhost:8088/messages`)
         .then(res => res.json())
-        .then(setMessages)
+        .then(res => {
+            setMessages(res)
+            return res})
     }
 
     const addMessage = (x) => {
@@ -34,12 +65,11 @@ export const CartProvider = (props) => {
             },
             body: JSON.stringify(x)
         })
-        .then(getMessages)
     }
 
     return (
         <CartContext.Provider value={{
-            items, messages, getCart, removeFromCart, getMessages, addMessage
+            items, messages, getUserById, getUsers, getCart, removeFromCart, getMessages, addMessage, requests, getRequestedOrders, responses, getRequestedResponses, setRequests
         }}>
             {props.children}
         </CartContext.Provider>

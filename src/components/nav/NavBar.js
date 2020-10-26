@@ -6,22 +6,30 @@ import "./NavBar.css"
 export const NavBar = (props) => {
 
     const checkAdmin = () => {
-        if(!!localStorage.getItem("CCCL_admin")) {
+        if (!!localStorage.getItem("CCCL_admin")) {
             return (
-                <Menu.Item
-                color="purple"
-                as={NavLink} to="/products/create"
-                name='Add Product'
-                />
+                <>
+                    <Menu.Item
+                        color="purple"
+                        as={NavLink} to="/products/create"
+                        name='Add Product'
+                    />
+
+                    <Menu.Item
+                        color="purple"
+                        as={NavLink} to="/requests"
+                        name='Requests'
+                    />
+                </>
             )
         }
         else {
             return (
                 <Menu.Item
-            color="purple"
-            as={NavLink} to="/cart"
-            name='Cart'
-            />)
+                    color="purple"
+                    as={NavLink} to="/cart"
+                    name='Cart'
+                />)
         }
 
     }
@@ -63,7 +71,7 @@ export const NavBar = (props) => {
                 </Menu.Item>
 
                 {checkAdmin()}
-                
+
                 <Menu.Menu position="right">
                     <Menu.Item
                         color="purple"

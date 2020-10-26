@@ -8,6 +8,8 @@ import { ProductForm } from "./Products/ProductForm"
 import { ProductProvider } from "./Products/ProductProvider"
 import { CartProvider } from "./Cart/CartProvider"
 import { CartList } from "./Cart/CartList"
+import { CartRequests } from "./Cart/CartRequests"
+import { CartRequestDetail } from "./Cart/CartRequestDetail"
 
 export const ApplicationViews = () => {
     return (
@@ -52,6 +54,18 @@ export const ApplicationViews = () => {
             <CartProvider>
                 <Route exact path="/cart">
                     <CartList />
+                </Route>
+            </CartProvider>
+
+            <CartProvider>
+                <Route exact path="/requests">
+                    <CartRequests />
+                </Route>
+            </CartProvider>
+
+            <CartProvider>
+                <Route exact path="/requests/:userId(\d+)">
+                    <CartRequestDetail />
                 </Route>
             </CartProvider>
 
