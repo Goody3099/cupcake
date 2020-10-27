@@ -30,7 +30,8 @@ export const CartCard = ({ items }) => {
             sentId: parseInt(localStorage.getItem("CCCL_customer")),
             sentUsername: localStorage.getItem("CCCL_username"),
             recId: 1,
-            message: ` Hi, I would like the ${i.description} on ${d} at ${t}. Comments/Questions: ${c}`
+            message: ` Hi, I would like the ${i.description} on ${d} at ${t}. Comments/Questions: ${c}`,
+            date: Date.now()
         })
         .then(getRequestedOrders)
     }
