@@ -5,6 +5,7 @@
 
 .messageCard{
     width: auto !important;
+    margin: 1% !important;
 }
 
 textarea {

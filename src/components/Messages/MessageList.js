@@ -1,13 +1,16 @@
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { MessageContext } from "./MessageProvider"
 import { MessageCard } from "./MessageCard"
 import "./Message.css"
-import { Card, Button, Input, Container, Divider } from "semantic-ui-react"
+import { Button, Input, Divider } from "semantic-ui-react"
+import { useInterval } from "../../useInterval"
 
 export const MessageList = () => {
-    const { messages, getMessages, addMessage, deleteMessage } = useContext(MessageContext)
+    const { messages, getMessages, addMessage } = useContext(MessageContext)
 
     const [message, setMessage] = useState("") 
+
+    useInterval(getMessages, 3000)
 
     const [changeMessageList, setChangeMessageList] = useState({})
 
@@ -17,10 +20,10 @@ export const MessageList = () => {
             userId: parseInt(localStorage.getItem("CCCL_customer")),
             date: Date.now()
         })
-        .then(setChangeMessageList)
+        .then(e => setChangeMessageList(message))
     }
 
-    function compare(a, b) {
+    const compare = (a, b) => {
         const bandA = a.date;
         const bandB = b.date;
     
@@ -41,7 +44,7 @@ export const MessageList = () => {
 
     return (
         <>
-            <Container>
+            <div className="text">
             <h2>User Experiences</h2>
             <div className="messages">
                 {
@@ -68,7 +71,7 @@ export const MessageList = () => {
                 }}>
             Submit 
             </Button>
-            </Container>
+            </div>
             
         </>
     )

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react"
-import { useHistory } from "react-router-dom"
 import { Button, Card, Icon, Modal } from "semantic-ui-react"
 import "./Message.css"
 import { MessageContext } from "./MessageProvider"
@@ -9,8 +8,6 @@ export const MessageCard = ({ message }) => {
     const { deleteMessage, editMessage } = useContext(MessageContext)
     const [editMessageInfo, setEditMessageInfo] = useState("")
     const [open, setOpen] = useState(false)
-
-    const history = useHistory()
 
     const hideDelete = () => {
         if (parseInt(localStorage.getItem("CCCL_customer")) === message.userId) {

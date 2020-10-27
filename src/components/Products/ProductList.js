@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
+import React, { useContext, useEffect } from "react"
 import { ProductCard } from "./ProductCard"
 import { ProductContext } from "./ProductProvider"
 import { Card } from "semantic-ui-react"
@@ -11,17 +10,15 @@ export const ProductListCake = () => {
         getProductsCake()
     }, [])
 
-    const history = useHistory()
-
     return (
-        <>
+        <div className="text">
             <h2>Cakes</h2>
             <Card.Group className="products">
                 {products.map(product => {
                     return <ProductCard key={product.id} product={product} />
                 })}
             </Card.Group>
-        </>
+        </div>
     )
 }
 export const ProductListCupcake = () => {
@@ -31,17 +28,15 @@ export const ProductListCupcake = () => {
         getProductsCupcake()
     }, [])
 
-    const history = useHistory()
-
     return (
-        <>
+        <div className="text">
             <h2>Cupcakes</h2>
             <Card.Group className="products">
                 {products.map(product => {
                     return <ProductCard key={product.id} product={product} />
                 })}
             </Card.Group>
-        </>
+        </div>
     )
 }
 export const ProductListCookie = () => {
@@ -51,17 +46,15 @@ export const ProductListCookie = () => {
         getProductsCookie()
     }, [])
 
-    const history = useHistory()
-
     return (
-        <>
+        <div className="text">
             <h2>Cookies</h2>
             <Card.Group className="products">
                 {products.map(product => {
                     return <ProductCard key={product.id} product={product} />
                 })}
             </Card.Group>
-        </>
+        </div>
     )
 }
 

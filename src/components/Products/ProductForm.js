@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
-import { Button, Dropdown, Form, Menu, Radio } from "semantic-ui-react"
+import { Button, Dropdown, Form } from "semantic-ui-react"
 import { ProductContext } from "./ProductProvider"
 
 export const ProductForm = () => {
@@ -8,7 +8,6 @@ export const ProductForm = () => {
 
     const [products, setProducts] = useState({})
     const [isLoading, setIsLoading] = useState(true)
-    const [type, setType] = useState("")
     const [value, setValue] = useState({})
 
     const { productId } = useParams()
@@ -70,7 +69,7 @@ export const ProductForm = () => {
     ]
 
     return (
-        <Form>
+        <Form className="requests">
             <Form.Field width="6">
                 <label>Product Name</label>
                 <input

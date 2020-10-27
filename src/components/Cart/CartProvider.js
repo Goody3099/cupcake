@@ -25,7 +25,6 @@ export const CartProvider = (props) => {
     }
 
     const getRequestedOrders = () => {
-        console.log("called?")
         return fetch(`http://localhost:8088/messages?sentId=${parseInt(localStorage.getItem("CCCL_customer"))}`)
         .then(res => res.json())
         .then(res => {
@@ -34,7 +33,6 @@ export const CartProvider = (props) => {
     }
 
     const getRequestedResponses = () => {
-        console.log("called?")
         return fetch(`http://localhost:8088/messages?recId=${parseInt(localStorage.getItem("CCCL_customer"))}`)
         .then(res => res.json())
         .then(res => {
