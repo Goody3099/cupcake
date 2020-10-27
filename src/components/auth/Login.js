@@ -11,11 +11,10 @@ export const Login = props => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        console.log(email)
         return fetch(`http://localhost:8088/users?email=${email}`)
             .then(res => res.json())
             .then(user => {
-                if (user[0].username === username) {
+                if (user[0]?.username === username) {
                     return user[0]
                 }
                 else { return false }
@@ -41,7 +40,7 @@ export const Login = props => {
     }
 
     return (
-        <main className="container--login">
+        <main className="container--login text">
             <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
