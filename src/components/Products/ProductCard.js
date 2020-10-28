@@ -23,11 +23,10 @@ export const ProductCard = ({ product }) => {
             <Image src={product.picture} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>{product.name}</Card.Header>
-                <Card.Description>{product.description}</Card.Description>
-            </Card.Content>
-            <Card.Content extra>
                 <Icon name="dollar sign" />
                 {product.price}
+            </Card.Content>
+            <Card.Content extra>
                 {localStorage.getItem("CCCL_admin") ?
                     <Button
                     onClick={e => {deleteProduct(product.id)
