@@ -82,8 +82,8 @@ export const CartCard = ({ items }) => {
                         </Form.Field>
                         <Form.Field>
                             <Input
-                                label="Theme"
-                                placeholder="Example: Batman for six year old."
+                                label="Modifications"
+                                placeholder="Example: 8-in, Batman theme for six year old."
                                 onChange={e => handlePlaceOrderComments(e.target.value)}
                             ></Input>
                         </Form.Field>
